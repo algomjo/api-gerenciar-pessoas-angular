@@ -50,6 +50,37 @@ export class PessoaFormComponent {
       });
   }
 
+  atualizarPessoa(): void {
+    this.pessoaService.atualizarPessoa(this.pessoa)
+      .subscribe(
+        () => {
+          console.log('Pessoa atualizada com sucesso!');
+          // Redirecionar ou atualizar a lista de pessoas
+        },
+        error => {
+          console.error('Erro ao atualizar pessoa:', error);
+        }
+      );
+  }
+  
+  deletarPessoa(): void {
+    if (this.pessoa.id) {
+      this.pessoaService.deletarPessoa(this.pessoa.id)
+        .subscribe(
+          () => {
+            console.log('Pessoa deletada com sucesso!');
+            // Redirecionar ou atualizar a lista de pessoas
+          },
+          error => {
+            console.error('Erro ao deletar pessoa:', error);
+          }
+        );
+    } else {
+      console.error('Não é possível deletar uma pessoa sem ID.');
+    }
+  }
+  
+
   limparCampos(): void {
     this.pessoa = {
       nome: '',

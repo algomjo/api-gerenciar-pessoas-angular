@@ -1,24 +1,55 @@
-<table border="2px">
-  <thead>
-    <tr>
-      <th >Nome</th>
-      <th>CPF</th>
-      <th>Email</th>
-      <th>Telefone</th>
-      <th>Endereço</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let pessoa of pessoas">
-      <td>{{ pessoa.nome }}</td>
-      <td>{{ pessoa.cpf }}</td>
-      <td>{{ pessoa.email }}</td>
-      <td>{{ pessoa.telefone }}</td>
-      <td>
-        {{ pessoa.endereco.logradouro }},
-        {{ pessoa.endereco.cidade }},
-        {{ pessoa.endereco.uf }}
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="container">
+  <h2>Lista de Pessoas</h2>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="pessoas" class="mat-elevation-z8">
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let pessoa">{{ pessoa.id }}</td>
+      </ng-container>
+
+      <!-- Nome Column -->
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let pessoa">{{ pessoa.nome }}</td>
+      </ng-container>
+
+      <!-- CPF Column -->
+      <ng-container matColumnDef="cpf">
+        <th mat-header-cell *matHeaderCellDef>CPF</th>
+        <td mat-cell *matCellDef="let pessoa">{{ pessoa.cpf }}</td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let pessoa">{{ pessoa.email }}</td>
+      </ng-container>
+
+      <!-- Telefone Column -->
+      <ng-container matColumnDef="telefone">
+        <th mat-header-cell *matHeaderCellDef>Telefone</th>
+        <td mat-cell *matCellDef="let pessoa">{{ pessoa.telefone }}</td>
+      </ng-container>
+
+      <!-- Ações Column -->
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let pessoa">
+          <button mat-icon-button color="primary" (click)="editarPessoa(pessoa)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deletarPessoa(pessoa.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+</div>

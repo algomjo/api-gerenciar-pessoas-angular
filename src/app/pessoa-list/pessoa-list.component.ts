@@ -9,16 +9,25 @@ import { PessoaService } from '../services/pessoa.service';
 })
 export class PessoaListComponent implements OnInit {
   pessoas: Pessoa[] = [];
+  displayedColumns: string[] = ['id', 'nome', 'cpf', 'email', 'telefone', 'acoes'];
 
   constructor(private pessoaService: PessoaService) {}
 
   ngOnInit() {
-    this.carregarPessoas();
+    this.obterPessoas();
   }
 
-  carregarPessoas() {
+  obterPessoas() {
     this.pessoaService.getPessoas().subscribe(pessoas => {
       this.pessoas = pessoas;
     });
+  }
+
+  editarPessoa(pessoa: Pessoa) {
+    // Implemente a lógica para editar a pessoa
+  }
+
+  deletarPessoa(id: number) {
+    // Implemente a lógica para deletar a pessoa pelo ID
   }
 }

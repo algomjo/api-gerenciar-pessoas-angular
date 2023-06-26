@@ -30,4 +30,9 @@ export class PessoaService {
   criarPessoa(pessoa: Pessoa): Observable<Pessoa> {
     return this.http.post<Pessoa>(this.apiUrl, pessoa);
   }
+
+  deletarPessoa(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+  
 }
