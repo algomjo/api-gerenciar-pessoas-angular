@@ -1,0 +1,24 @@
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>CPF</th>
+      <th>Email</th>
+      <th>Telefone</th>
+      <th>Endereço</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pessoa of pessoas">
+      <td>{{ pessoa.nome }}</td>
+      <td>{{ pessoa.cpf }}</td>
+      <td>{{ pessoa.email }}</td>
+      <td>{{ pessoa.telefone }}</td>
+      <td>
+        {{ pessoa.endereco.logradouro }},
+        {{ pessoa.endereco.cidade }},
+        {{ pessoa.endereco.uf }}
+      </td>
+    </tr>
+  </tbody>
+</table>
