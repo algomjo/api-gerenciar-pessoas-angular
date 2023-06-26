@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PessoaListComponent } from './pessoa-list/pessoa-list.component';

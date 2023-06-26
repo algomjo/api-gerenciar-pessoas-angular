@@ -1,9 +1,21 @@
 <h1>{{ title }}</h1>
 
 <nav>
-  <a routerLink="/">Home</a>
-  <a routerLink="/pessoas">Lista de Pessoas</a>
-  <a routerLink="/pessoas/nova">Nova Pessoa</a>
+  <a routerLink="/" matTooltip="Home">
+    <mat-icon>home</mat-icon>
+    <!--Home-->
+  </a>
+  
+  <a routerLink="/pessoas" matTooltip="Lista de Pessoas">
+    <mat-icon>list</mat-icon>
+    <!--Lista de Pessoas-->
+  </a>
+  
+  <a routerLink="/pessoas/nova" matTooltip="Adicionar Pessoa">
+    <mat-icon>add</mat-icon>
+    <!--Adicionar Pessoa-->
+  </a>
+  
 </nav>
 
 <router-outlet></router-outlet>

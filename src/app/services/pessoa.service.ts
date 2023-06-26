@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Pessoa } from '../models/pessoa';
+import { Endereco } from '../models/endereco';
+
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +35,11 @@ export class PessoaService {
 
   deletarPessoa(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  buscarEnderecoPorCep(cep: string): Observable<Endereco> {
+    const url = `http://seu-servico-de-cep.com/api/cep/${cep}`;
+    return this.http.get<Endereco>(url);
   }
   
 }

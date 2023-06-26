@@ -1,56 +1,61 @@
-<h2>Nova Pessoa</h2>
+<form (submit)="criarPessoa()">
+  <div class="form-section">
+    <mat-form-field class="full-width">
+      <input matInput [(ngModel)]="pessoa.nome" name="nome" placeholder="Nome" required>
+    </mat-form-field>
 
-<mat-card>
-  <mat-card-content>
-    <form>
-      <!-- Campos para dados da pessoa -->
-      <mat-form-field>
-        <input matInput [(ngModel)]="pessoa.nome" name="nome" placeholder="Nome" required>
-      </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="pessoa.cpf" name="cpf" placeholder="CPF" required mask="000.000.000-00">
+    </mat-form-field>
+  </div>
 
-      <mat-form-field>
-        <input matInput [(ngModel)]="pessoa.cpf" name="cpf" placeholder="CPF" required>
-      </mat-form-field>
+  <div class="form-section">
+    <mat-form-field class="full-width">
+      <input matInput [(ngModel)]="pessoa.email" name="email" placeholder="Email" required>
+    </mat-form-field>
 
-      <mat-form-field>
-        <input matInput [(ngModel)]="pessoa.email" name="email" placeholder="Email" required>
-      </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="pessoa.telefone" name="telefone" placeholder="Telefone" >
+    </mat-form-field>
+  </div>
 
-      <mat-form-field>
-        <input matInput [(ngModel)]="pessoa.telefone" name="telefone" placeholder="Telefone" required>
-      </mat-form-field>
+  <div class="form-section">
+    <mat-form-field>
+      <input matInput [(ngModel)]="pessoa.endereco.cep" name="cep" placeholder="CEP" required (blur)="buscarEnderecoPorCep()" mask="00000-000">
+    </mat-form-field>
+  </div>
 
-      <!-- Campos para dados do endereço -->
-      <h3>Endereço</h3>
+  <div class="form-section">
+    <mat-form-field class="full-width">
+      <input matInput [(ngModel)]="pessoa.endereco.logradouro" name="logradouro" placeholder="Logradouro" required>
+    </mat-form-field>
 
-      <mat-form-field >
-        <input matInput [(ngModel)]="pessoa.endereco.cep" name="cep" placeholder="CEP" required (blur)="buscarEnderecoPorCep()">
-      </mat-form-field>
+    <mat-form-field class="numero.field">
+      <input matInput [(ngModel)]="pessoa.endereco.numero" name="numero" placeholder="Número" required>
+    </mat-form-field>
+  </div>
 
-      <mat-form-field class="logradouro-field">
-        <input matInput [(ngModel)]="pessoa.endereco.logradouro" name="logradouro" placeholder="Logradouro" required>
-      </mat-form-field>
+  <div class="form-section">
+    <mat-form-field>
+      <input matInput [(ngModel)]="pessoa.endereco.bairro" name="bairro" placeholder="Bairro" required>
+    </mat-form-field>
 
-      <mat-form-field class="numero-field">
-        <input matInput [(ngModel)]="pessoa.endereco.numero" name="numero" placeholder="Número" required>
-      </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="pessoa.endereco.cidade" name="cidade" placeholder="Cidade" required>
+    </mat-form-field>
 
-      <mat-form-field>
-        <input matInput [(ngModel)]="pessoa.endereco.bairro" name="bairro" placeholder="Bairro" required>
-      </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="pessoa.endereco.uf" name="uf" placeholder="UF" required>
+    </mat-form-field>
+  </div>
 
-      <mat-form-field>
-        <input matInput [(ngModel)]="pessoa.endereco.cidade" name="cidade" placeholder="Cidade" required>
-      </mat-form-field>
+  <div class="button-container">
+    <button mat-raised-button class="botao" color="primary" type="button" (click)="criarPessoa()">
+      <mat-icon>save</mat-icon> Salvar
+    </button>
+    <button mat-raised-button class="botao" color="warn" type="button" (click)="limparCampos()">
+      <mat-icon>clear</mat-icon> Limpar Campos
+    </button>
 
-      <mat-form-field>
-        <input matInput [(ngModel)]="pessoa.endereco.uf" name="uf" placeholder="UF" required>
-      </mat-form-field>
-
-      <button mat-raised-button color="primary" (click)="criarPessoa()">Criar Pessoa</button>
-      <button mat-raised-button color="warn" (click)="limparCampos()">Limpar</button>
-      
-
-    </form>
-  </mat-card-content>
-</mat-card>
+  </div>
+</form>

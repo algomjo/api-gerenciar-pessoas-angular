@@ -1,8 +1,18 @@
-.logradouro-field {
+  .full-width {
     width: 400px;
   }
   
-  .numero-field {
+  .small-width {
     width: 100px;
+  }
+  
+  .button-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .botao {
+    display: flex;
+    align-items: center;
   }
   
