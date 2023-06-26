@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Pessoa } from '../models/pessoa';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { PessoaService } from '../services/pessoa.service';
 import { CepService } from '../services/cep.service';
+import { Pessoa, Endereco } from '../models/pessoa';
 
 @Component({
   selector: 'app-pessoa-form',
   templateUrl: './pessoa-form.component.html',
   styleUrls: ['./pessoa-form.component.css']
 })
-export class PessoaFormComponent implements OnInit {
+export class PessoaFormComponent {
   pessoa: Pessoa = {
-    id: 0,
     nome: '',
     cpf: '',
     email: '',
@@ -19,6 +18,7 @@ export class PessoaFormComponent implements OnInit {
     endereco: {
       cep: '',
       logradouro: '',
+      numero: '',
       bairro: '',
       cidade: '',
       uf: ''
@@ -26,12 +26,12 @@ export class PessoaFormComponent implements OnInit {
   };
 
   constructor(
+    private pessoaService: PessoaService,
     private cepService: CepService,
-    private route: ActivatedRoute,
-    private pessoaService: PessoaService
+    private router: Router
   ) {}
 
-  buscarEndereco() {
+  buscarEnderecoPorCep(): void {
     this.cepService.buscarEndereco(this.pessoa.endereco.cep)
       .subscribe(response => {
         this.pessoa.endereco.logradouro = response.logradouro;
@@ -41,30 +41,29 @@ export class PessoaFormComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {
-    this.getDadosPessoa();
-  }
-
-  getDadosPessoa(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (id) {
-      this.pessoaService.obterPessoa(id)
-        .subscribe(pessoa => {
-          this.pessoa = pessoa;
-        });
-    }
-  }
-
   criarPessoa(): void {
-    this.pessoaService.criarPessoa(this.pessoa)
-      .subscribe(
-        () => {
-          console.log('Pessoa criada com sucesso!');
-          // Redirecionar ou atualizar a lista de pessoas
-        },
-        error => {
-          console.error('Erro ao criar pessoa:', error);
-        }
-      );
+    this.pessoaService.adicionarPessoa(this.pessoa)
+      .subscribe(() => {
+        console.log('Pessoa criada com sucesso!');
+        this.limparCampos();
+        this.router.navigate(['/pessoas']);
+      });
+  }
+
+  limparCampos(): void {
+    this.pessoa = {
+      nome: '',
+      cpf: '',
+      email: '',
+      telefone: '',
+      endereco: {
+        cep: '',
+        logradouro: '',
+        numero: '',
+        bairro: '',
+        cidade: '',
+        uf: ''
+      }
+    };
   }
 }

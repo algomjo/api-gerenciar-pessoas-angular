@@ -1,48 +1,54 @@
-<h2>Editar Pessoa</h2>
+<h2>Nova Pessoa</h2>
 
 <mat-card>
   <mat-card-content>
     <form>
-      <table class="mat-table" *ngIf="pessoa">
-        <tr>
-          <th>ID</th>
-          <td>{{ pessoa.id }}</td>
-        </tr>
-        <tr>
-          <th>Nome</th>
-          <td>
-            <mat-form-field>
-              <input matInput [(ngModel)]="pessoa.nome" name="nome" required>
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <th>CPF</th>
-          <td>
-            <mat-form-field>
-              <input matInput [(ngModel)]="pessoa.cpf" name="cpf" required>
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <th>Email</th>
-          <td>
-            <mat-form-field>
-              <input matInput [(ngModel)]="pessoa.email" name="email" required>
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <th>Telefone</th>
-          <td>
-            <mat-form-field>
-              <input matInput [(ngModel)]="pessoa.telefone" name="telefone" required>
-            </mat-form-field>
-          </td>
-        </tr>
-      </table>
+      <!-- Campos para dados da pessoa -->
+      <mat-form-field>
+        <input matInput [(ngModel)]="pessoa.nome" name="nome" placeholder="Nome" required>
+      </mat-form-field>
 
-      <button mat-button (click)="criarPessoa()" color="primary">Criar</button>
+      <mat-form-field>
+        <input matInput [(ngModel)]="pessoa.cpf" name="cpf" placeholder="CPF" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [(ngModel)]="pessoa.email" name="email" placeholder="Email" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [(ngModel)]="pessoa.telefone" name="telefone" placeholder="Telefone" required>
+      </mat-form-field>
+
+      <!-- Campos para dados do endereço -->
+      <h3>Endereço</h3>
+
+      <mat-form-field >
+        <input matInput [(ngModel)]="pessoa.endereco.cep" name="cep" placeholder="CEP" required (blur)="buscarEnderecoPorCep()">
+      </mat-form-field>
+
+      <mat-form-field class="logradouro-field">
+        <input matInput [(ngModel)]="pessoa.endereco.logradouro" name="logradouro" placeholder="Logradouro" required>
+      </mat-form-field>
+
+      <mat-form-field class="numero-field">
+        <input matInput [(ngModel)]="pessoa.endereco.numero" name="numero" placeholder="Número" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [(ngModel)]="pessoa.endereco.bairro" name="bairro" placeholder="Bairro" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [(ngModel)]="pessoa.endereco.cidade" name="cidade" placeholder="Cidade" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [(ngModel)]="pessoa.endereco.uf" name="uf" placeholder="UF" required>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="criarPessoa()">Criar Pessoa</button>
+      <button mat-raised-button color="warn" (click)="limparCampos()">Limpar</button>
     </form>
   </mat-card-content>
 </mat-card>
